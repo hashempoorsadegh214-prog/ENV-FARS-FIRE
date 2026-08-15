@@ -8,6 +8,8 @@ const fireState = {
 
     archiveHeaders: [],
 
+    archiveCache: {},
+
     mode: "24h"
 
 };
@@ -34,15 +36,6 @@ function fireSensor(
 
 async function loadFallbackCSV(){
 
-    if(
-        fireState.fires.length > 0
-    ){
-
-        return;
-
-    }
-
-
     try{
 
         const parsed =
@@ -60,12 +53,120 @@ async function loadFallbackCSV(){
         fireState.fires =
             parsed.rows.slice();
 
+
     }catch(error){
 
         console.error(
             "خطا در fires.csv:",
             error
         );
+
+        fireState.fires =
+            [];
+
+    }
+
+}
+
+
+/* =========================
+   LOAD ONE ARCHIVE DATE
+========================= */
+
+async function loadArchiveDate(
+    date
+){
+
+    if(
+        !date
+    ){
+
+        return [];
+
+    }
+
+
+    /*
+       اگر قبلاً همین روز خوانده شده،
+       دوباره از GitHub دانلود نکن.
+    */
+
+    if(
+        Object.prototype.hasOwnProperty.call(
+            fireState.archiveCache,
+            date
+        )
+    ){
+
+        return fireState.archiveCache[
+            date
+        ];
+
+    }
+
+
+    try{
+
+        const parsed =
+            parseCSV(
+                await getText(
+                    "archive/" +
+                    date +
+                    ".csv"
+                )
+            );
+
+
+        /*
+           تاریخ آرشیو را
+           به هر رکورد اضافه می‌کنیم.
+        */
+
+        parsed.rows.forEach(
+            row => {
+
+                row.archive_date =
+                    date;
+
+            }
+        );
+
+
+        if(
+            fireState.archiveHeaders.length === 0
+        ){
+
+            fireState.archiveHeaders =
+                parsed.headers.slice();
+
+        }
+
+
+        fireState.archiveCache[
+            date
+        ] =
+            parsed.rows;
+
+
+        return parsed.rows;
+
+
+    }catch(error){
+
+        console.warn(
+            "آرشیو این تاریخ پیدا نشد:",
+            date,
+            error
+        );
+
+
+        fireState.archiveCache[
+            date
+        ] =
+            [];
+
+
+        return [];
 
     }
 
@@ -78,7 +179,7 @@ async function loadFallbackCSV(){
 
 function setFireData(
     rows,
-    headers=[]
+    headers = []
 ){
 
     fireState.fires =
@@ -102,7 +203,7 @@ function setFireData(
 
 
 /* =========================
-   GET ALL FIRES
+   GET ALL CURRENT FIRES
 ========================= */
 
 function getAllFires(){
@@ -113,7 +214,7 @@ function getAllFires(){
 
 
 /* =========================
-   GET TIME FILTERED FIRES
+   TIME FILTER
 ========================= */
 
 function getTimeFilteredFires(){
@@ -171,7 +272,7 @@ function getTimeFilteredFires(){
 
 
 /* =========================
-   GET VISIBLE FIRES
+   CURRENT VISIBLE FIRES
 ========================= */
 
 function getVisibleFires(){
@@ -188,7 +289,7 @@ function getVisibleFires(){
 
 
 /* =========================
-   POPUP
+   FIRE POPUP
 ========================= */
 
 function createFirePopup(
@@ -234,8 +335,8 @@ function createFirePopup(
         :
 
         {
-            protected:[],
-            hunting:[]
+            protected: [],
+            hunting: []
         };
 
 
@@ -360,9 +461,7 @@ function createFirePopup(
                 </span>
 
                 ${fa(
-                    iranTime(
-                        fire
-                    )
+                    iranTime(fire)
                 )}
 
             </div>
@@ -374,9 +473,7 @@ function createFirePopup(
                     زمان:
                 </span>
 
-                ${getTimeLabel(
-                    fire
-                )}
+                ${getTimeLabel(fire)}
 
             </div>
 
@@ -561,7 +658,7 @@ function renderFires(
 
 
 /* =========================
-   REFRESH DISPLAY
+   REFRESH CURRENT DISPLAY
 ========================= */
 
 function refreshFireDisplay(){
@@ -653,12 +750,10 @@ function initFireControls(){
 
                             item.classList.toggle(
                                 "active",
-                                item ===
-                                button
+                                item === button
                             );
 
                         }
-
                     );
 
                 }
@@ -671,7 +766,7 @@ function initFireControls(){
 
 
 /* =========================
-   GET CURRENT FIRE COUNT
+   GET CURRENT COUNT
 ========================= */
 
 function getCurrentFireCount(){
@@ -683,7 +778,7 @@ function getCurrentFireCount(){
 
 
 /* =========================
-   GET CURRENT FIRE DATA
+   GET CURRENT DATA
 ========================= */
 
 function getCurrentVisibleFires(){
