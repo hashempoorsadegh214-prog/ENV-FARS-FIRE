@@ -14,12 +14,10 @@
     سامانه پایش و مدیریت داده‌های حریق
 </title>
 
-
 <link
     rel="stylesheet"
     href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
 />
-
 
 <link
     rel="stylesheet"
@@ -36,10 +34,9 @@
 
     <img
         class="header-logo"
-        src="logo.png"
+        src="logo.webp"
         alt="لوگوی سامانه"
     >
-
 
     <div class="header-content">
 
@@ -60,7 +57,6 @@
 
     <div class="header-buttons">
 
-
         <button
             id="reportBtn"
             class="header-btn"
@@ -68,7 +64,6 @@
         >
             📸
         </button>
-
 
         <button
             id="excelBtn"
@@ -78,7 +73,6 @@
             📊
         </button>
 
-
         <button
             id="nightBtn"
             class="header-btn"
@@ -86,7 +80,6 @@
         >
             🌙
         </button>
-
 
         <button
             id="refreshBtn"
@@ -96,19 +89,15 @@
             ↻
         </button>
 
-
     </div>
 
 </header>
 
 
-
 <div id="map"></div>
 
 
-
 <div class="control-panel">
-
 
     <div class="fire-count">
 
@@ -128,14 +117,12 @@
     </div>
 
 
-
     <button
         class="mode-btn active"
         data-mode="24h"
     >
         🔥 حریق‌های ۲۴ ساعت گذشته
     </button>
-
 
 
     <button
@@ -146,14 +133,11 @@
     </button>
 
 
-
     <div class="area-box">
-
 
         <div class="area-title">
             فیلتر مکانی
         </div>
-
 
 
         <label class="area-option">
@@ -168,7 +152,6 @@
         </label>
 
 
-
         <label class="area-option">
 
             <input
@@ -180,21 +163,16 @@
 
         </label>
 
-
     </div>
 
 </div>
 
 
-
 <div class="sensor-box">
-
 
     <span>
         سنجنده
     </span>
-
-
 
     <span class="sensor-item">
 
@@ -207,8 +185,6 @@
 
     </span>
 
-
-
     <span class="sensor-item">
 
         <span
@@ -220,13 +196,10 @@
 
     </span>
 
-
 </div>
 
 
-
 <div class="update-box">
-
 
     <span
         id="sensorAge"
@@ -236,8 +209,6 @@
         در انتظار اطلاعات
     </span>
 
-
-
     <span
         id="systemAge"
         class="update-row"
@@ -246,25 +217,18 @@
         در انتظار اطلاعات
     </span>
 
-
 </div>
-
 
 
 <div class="slider-box">
 
-
     <div class="slider-head">
-
 
         <span class="slider-title">
             آرشیو روزانه
         </span>
 
-
-
         <div>
-
 
             <div
                 id="sliderDate"
@@ -273,8 +237,6 @@
                 ---
             </div>
 
-
-
             <div
                 id="sliderCount"
                 class="slider-count"
@@ -282,12 +244,9 @@
                 تعداد رخداد: ۰
             </div>
 
-
         </div>
 
-
     </div>
-
 
 
     <input
@@ -299,39 +258,24 @@
         step="1"
     >
 
-
 </div>
-
 
 
 <script
     src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
 ></script>
 
-
 <script src="js/config.js"></script>
-
 <script src="js/utils.js"></script>
-
 <script src="js/map.js"></script>
-
 <script src="js/areas.js"></script>
-
 <script src="js/fires.js"></script>
-
 <script src="js/archive.js"></script>
-
 <script src="js/status.js"></script>
-
 <script src="js/excel.js"></script>
-
 <script src="js/report.js"></script>
-
 <script src="js/ui.js"></script>
-
 <script src="js/main.js"></script>
 
-
 </body>
-
 </html>
