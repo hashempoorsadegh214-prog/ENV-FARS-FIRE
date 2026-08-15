@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+    سامانه پایش و مدیریت داده‌های حریق
+</title>
+
+
+<link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+/>
+
+
+<link
+    rel="stylesheet"
+    href="css/style.css"
+/>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <img
+        class="header-logo"
+        src="logo.png"
+        alt="لوگوی سامانه"
+    >
+
+
+    <div class="header-content">
+
+        <div class="title">
+
+            <h1>
+                سامانه پایش و مدیریت داده‌های حریق
+            </h1>
+
+            <p>
+                پایش برخط حریق با استفاده از داده‌های سنجش‌ازدور
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="header-buttons">
+
+
+        <button
+            id="reportBtn"
+            class="header-btn"
+            title="گزارش منطقه"
+        >
+            📸
+        </button>
+
+
+        <button
+            id="excelBtn"
+            class="header-btn"
+            title="گزارش Excel"
+        >
+            📊
+        </button>
+
+
+        <button
+            id="nightBtn"
+            class="header-btn"
+            title="حالت شب"
+        >
+            🌙
+        </button>
+
+
+        <button
+            id="refreshBtn"
+            class="header-btn"
+            title="بازخوانی"
+        >
+            ↻
+        </button>
+
+
+    </div>
+
+</header>
+
+
+
+<div id="map"></div>
+
+
+
+<div class="control-panel">
+
+
+    <div class="fire-count">
+
+        رخدادهای شناسایی‌شده
+
+        <br>
+
+        <span
+            id="fireCount"
+            class="fire-count-number"
+        >
+            ۰
+        </span>
+
+        رخداد
+
+    </div>
+
+
+
+    <button
+        class="mode-btn active"
+        data-mode="24h"
+    >
+        🔥 حریق‌های ۲۴ ساعت گذشته
+    </button>
+
+
+
+    <button
+        class="mode-btn"
+        data-mode="5days"
+    >
+        📅 حریق‌های ۵ روز گذشته
+    </button>
+
+
+
+    <div class="area-box">
+
+
+        <div class="area-title">
+            فیلتر مکانی
+        </div>
+
+
+
+        <label class="area-option">
+
+            <input
+                id="protectedFilter"
+                type="checkbox"
+            >
+
+            مناطق چهارگانه محیط زیست
+
+        </label>
+
+
+
+        <label class="area-option">
+
+            <input
+                id="huntingFilter"
+                type="checkbox"
+            >
+
+            مناطق شکار ممنوع
+
+        </label>
+
+
+    </div>
+
+</div>
+
+
+
+<div class="sensor-box">
+
+
+    <span>
+        سنجنده
+    </span>
+
+
+
+    <span class="sensor-item">
+
+        <span
+            class="sensor-dot"
+            style="background:#ff1744"
+        ></span>
+
+        VIIRS
+
+    </span>
+
+
+
+    <span class="sensor-item">
+
+        <span
+            class="sensor-dot"
+            style="background:#ff9800"
+        ></span>
+
+        MODIS
+
+    </span>
+
+
+</div>
+
+
+
+<div class="update-box">
+
+
+    <span
+        id="sensorAge"
+        class="update-row"
+    >
+        آخرین مشاهده حریق توسط سنجنده:
+        در انتظار اطلاعات
+    </span>
+
+
+
+    <span
+        id="systemAge"
+        class="update-row"
+    >
+        آخرین به‌روزرسانی سامانه:
+        در انتظار اطلاعات
+    </span>
+
+
+</div>
+
+
+
+<div class="slider-box">
+
+
+    <div class="slider-head">
+
+
+        <span class="slider-title">
+            آرشیو روزانه
+        </span>
+
+
+
+        <div>
+
+
+            <div
+                id="sliderDate"
+                class="slider-date"
+            >
+                ---
+            </div>
+
+
+
+            <div
+                id="sliderCount"
+                class="slider-count"
+            >
+                تعداد رخداد: ۰
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <input
+        id="archiveSlider"
+        type="range"
+        min="0"
+        max="0"
+        value="0"
+        step="1"
+    >
+
+
+</div>
+
+
+
+<script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+></script>
+
+
+<script src="js/config.js"></script>
+
+<script src="js/utils.js"></script>
+
+<script src="js/map.js"></script>
+
+<script src="js/areas.js"></script>
+
+<script src="js/fires.js"></script>
+
+<script src="js/archive.js"></script>
+
+<script src="js/status.js"></script>
+
+<script src="js/excel.js"></script>
+
+<script src="js/report.js"></script>
+
+<script src="js/ui.js"></script>
+
+<script src="js/main.js"></script>
+
+
+</body>
+
+</html>
